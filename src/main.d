@@ -7,7 +7,7 @@ module main;
 
 import std.stdio, std.mmfile;
 import core.stdc.stdlib : exit;
-import ddhx, settings;
+import ddhx, settings, mouse;
 import std.file : exists, isDir;
 import std.getopt;
 
@@ -49,6 +49,14 @@ void pversion() {
 }
 
 int main(string[] args) {
+    linux_mouse_handle my_handle;
+
+    int code = init_mouse(&my_handle);
+
+    if (code != 0) {
+        exit(code);
+    }
+
 	if (args.length <= 1) // FILE or OPTION required
 		phelp;
 
